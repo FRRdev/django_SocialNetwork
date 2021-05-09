@@ -1,0 +1,19 @@
+{% extends "layout/base.html" %}
+{% load static %}
+{% load thumbnail %}
+{% block content %}
+<h3>Профиль пользователя {{ user.username }}</h3>
+{% if user.image %}
+        <img class="mr-3" src="{% thumbnail user.image 'default' %}">
+{% else %}
+        <img src="{% static 'main/default_avatar.png' %}">
+{% endif %}
+<p>Имя: {{ user.first_name }}</p>
+<p>Фамилия: {{ user.last_name }}</p>
+<p>Почта: {{ user.email }}</p>
+<p>телефон: {{ user.phone }}</p>
+<p>Дата рождения: {{ user.date_of_birth }}</p>
+<p>Город: {{ user.city }}</p>
+<p>О себе: {{ user.about_me }}</p>
+
+{% endblock content %}

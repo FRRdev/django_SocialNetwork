@@ -1,0 +1,20 @@
+{% extends "layout/base.html" %}
+{% load static %}
+{% block content %}
+                {% if user.is_authenticated %}
+    <p>Вы успешно зашли в свой аккаунт!</p>
+    <p>На нашем сайте вы сможете писать сообщения пользователям и смотреть погоду</p>
+     {% else %}
+			Для использования сайта ,пожалуйста,зарегестрируйтесь или войдите в свой аккаунт
+     {% endif %}
+<!--     <div class='person'>
+                <img class='person__img' src="{% static 'main/new.png' %}">
+				<dir class="person__item">
+					<div class="person__name">Михаил</div>
+					<div class="person__name">Михаил</div>
+				</dir>
+				</div> -->
+{% endblock %}
+
+
+

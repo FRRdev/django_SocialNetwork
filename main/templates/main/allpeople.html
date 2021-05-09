@@ -1,0 +1,27 @@
+{% extends "layout/base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% load thumbnail %}
+{% block content %}
+<h2>Список пользователей:</h2>
+{% for pep in people %}
+{% url 'main:send_message' from_pk=request.user.pk to_pk=pep.pk as url %}
+<div class='person'>
+    {% if pep.image %}
+                <img class='person__img' src="{% thumbnail pep.image 'allp' %}">
+    {% else %}
+                <img class="mr-3" src="{% static 'main/new.png' %}">
+    {% endif %}
+				<dir class="person__item">
+					<div>Имя: {{ pep.first_name }}</div>
+                    <div>Фамилия: {{ pep.last_name }}</div>
+                    <div>Дата рождения: {{ pep.date_of_birth }}</div>
+                    <div>Город: {{ pep.city }}</div>
+                    <a href="{{ url }}" class="btn btn-success btn-block mb-3">написать сообщение</a>
+
+				</dir>
+</div>
+
+{% endfor %}
+{% bootstrap_pagination page url=keyword %}
+{% endblock content %}

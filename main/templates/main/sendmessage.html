@@ -1,0 +1,12 @@
+{% extends "layout/base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% load thumbnail %}
+{% block content %}
+<h2>Отправка сообщения пользователю {{ to_user.first_name }} {{ to_user.last_name }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+    {% buttons submit='Отправить' %}{% endbuttons %}
+</form>
+{% endblock content %}

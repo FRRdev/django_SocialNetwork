@@ -1,0 +1,39 @@
+{% extends "layout/base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% load thumbnail %}
+{% block title %} Погода {% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 offset-1">
+            <h1>Погода в вашем городе</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <label for="city">Город</label>
+                {{ form.name }}
+                <input type="submit" name="send" value="Узнать" class="mt-2 btn btn-danger">
+            </form>
+        </div>
+        <div class="col-4 offset-1">
+            <h1>Информация</h1>
+            {% for info in all_info %}
+            <div class="alert alert-info">
+                <div class="row">
+                    <div class="col-9">
+                        <b>Город:</b> {{ info.city }} <br>
+                        <b>Температура:</b> {{ info.temp }}<sup>o</sup> <br>
+                    </div>
+                    <div class="col-2 offset-1">
+                        <img src="http://openweathermap.org/img/w/{{ info.icon }}.png">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,80 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Cardo:ital@1&family=Open+Sans:wght@700&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+	{% bootstrap_css %}
+	<link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+	<title>{% block title %}iVK{% endblock %}</title>
+	{% bootstrap_javascript jquery='slim' %} <!-- Для создания раскрывающегося меню -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+	<header class="header">
+		<div class="cont">
+			<div class='header__inner'>
+				<div class="header__logo">
+					<H1>iVK</H1>
+				</div>
+				<nav class="nav">
+					<a  class="nav__link" href="{% url 'main:weather' %}">Погода</a>
+					<a  class="nav__link" href="{% url 'main:register' %}">Регистрация</a>
+					{% if user.is_authenticated %}
+					<a  class="nav__link" href="{% url 'main:people' %}">Написать</a>
+					<a  class="nav__link" href="{% url 'main:show_messages' pk=request.user.pk %}">Сообщения <span class="badge badge-pill badge-danger">{{ count.count }}</span></a>
+					<select class="nav__link nav__select" onchange="window.location.href = this.options[this.selectedIndex].value">
+						<option>Выберите</option>
+						<option value="{% url 'main:profile' %}">Мой профиль</option>
+						<option value="{% url 'main:profile_change' %}">Изменить личные данные</option>
+						<option value="{% url 'main:password_change' %}">Изменить пароль</option>
+						<option value="{% url 'main:logout' %}">Выйти</option>
+					</select>
+					{% else %}
+					<a  class="nav__link" href="{% url 'main:login' %}">Вход</a>
+					{% endif %}
+
+				</nav>
+			</div>
+		</div>
+	</header>
+
+
+	<div class="intro">
+		<div class="cont">
+			{% bootstrap_messages %}
+				{% block content %}
+			Для использования сайта ,пожалуйста,зарегестрируйтесь или войдите в свой аккаунт
+				{% endblock content %}
+
+
+
+
+		</div>
+	</div>
+
+
+
+
+<footer class="footer">
+
+
+	<div class="copy">
+		<div class="cont">
+			<div class="copy__text">
+				<div>Copyright © 2021 . All Rights Reserved</div>
+				<div>Made  <span>by FRRdev</span></div>
+			</div>
+		</div>
+	</div>
+</footer>
+</body>
+</html>

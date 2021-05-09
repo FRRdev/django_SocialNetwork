@@ -1,0 +1,13 @@
+{% extends "layout/base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% load thumbnail %}
+{% block content %}
+<h2>Сообщение от пользователя: {{ message.from_user }}</h2>
+<div class="detail__inner">
+    <h4>Текст ообщения:</h4>
+    <div class="detail__item">{{ message.content }}</div>
+</div>
+<h5 class="detail__time">Сообщение отпрвлено: {{ message.data_of_mes }}</h5>
+<a href="{% url 'main:delete_message' pk=message.pk %}" type="button" class="btn btn-primary">Удалить</a>
+{% endblock content %}

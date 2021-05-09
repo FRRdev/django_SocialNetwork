@@ -1,0 +1,30 @@
+{% extends "layout/base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% load thumbnail %}
+{% block content %}
+<h2>Список ваших сообщений:</h2>
+{% for msg in all_msg %}
+{% url 'main:detail_mes' pk=msg.pk as url %}
+{% if msg in msgs_active %}
+<div onclick="location.href='{{ url }}';" class='message__item' >
+    <div class="red__block"></div>
+    <div class="message__inner">
+        <h5>Новое сообщение !</h5>
+        <h6>От: {{ msg.from_user }}</h6>
+    </div>
+</div>
+{% else %}
+<div onclick="location.href='{{ url }}';" class='message__item'>
+    <div class="message__no_active">
+        <h5>Прочитанное сообщение</h5>
+        <h6>От: {{ msg.from_user }}</h6>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+{% bootstrap_pagination page url=keyword %}
+
+
+
+{% endblock content %}
